@@ -74,6 +74,7 @@ const I18N = {
   },
 };
 let LANG = "ar";
+let LAST_TOKEN = null, LAST_WALLET = null;
 const t = (k) => (I18N[LANG][k] ?? I18N.en[k] ?? k);
 
 function applyLang() {
@@ -159,6 +160,7 @@ async function checkToken(mintRaw) {
   const mint = String(mintRaw || "").trim();
   const out = $("#tokenOut");
   if (!isB58(mint)) { out.innerHTML = `<div class="err">${esc(t("badAddr"))}</div>`; return; }
+  LAST_TOKEN = mint;
   out.innerHTML = `<div class="spin">${esc(t("checking"))}</div>`;
 
   try {
@@ -260,6 +262,7 @@ async function checkWallet(addrRaw) {
   const addr = String(addrRaw || "").trim();
   const out = $("#walletOut");
   if (!isB58(addr)) { out.innerHTML = `<div class="err">${esc(t("badAddr"))}</div>`; return; }
+  LAST_WALLET = addr;
   out.innerHTML = `<div class="spin">${esc(t("checking"))}</div>`;
   try {
     const [bal, toks] = await Promise.all([
@@ -294,7 +297,13 @@ async function checkWallet(addrRaw) {
 /* ---------- wiring ---------- */
 document.addEventListener("DOMContentLoaded", () => {
   applyLang();
-  $("#lang").addEventListener("click", () => { LANG = LANG === "ar" ? "en" : "ar"; applyLang(); });
+  $("#lang").addEventListener("click", () => {
+    LANG = LANG === "ar" ? "en" : "ar";
+    applyLang();
+    // results are rendered once, so re-render them in the new language
+    if (LAST_TOKEN) checkToken(LAST_TOKEN);
+    if (LAST_WALLET) checkWallet(LAST_WALLET);
+  });
 
   document.querySelectorAll(".tab").forEach((b) => b.addEventListener("click", () => {
     document.querySelectorAll(".tab").forEach((x) => x.classList.remove("active"));
