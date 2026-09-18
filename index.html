@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SolPulse — نبض سولانا | Solana intelligence</title>
+<meta name="description" content="Arabic-first Solana token and wallet intelligence. Live on-chain risk checks, no backend.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <div class="brand">
+    <span class="dot"></span>
+    <h1>SolPulse</h1>
+    <span class="sub" data-i18n="tagline">نبض سولانا — فحص فوري على السلسلة</span>
+  </div>
+  <button id="lang" class="lang" aria-label="language">EN</button>
+</header>
+
+<main>
+  <section class="hero">
+    <p class="lede" data-i18n="lede">
+      افحص أي رمز أو محفظة على سولانا مباشرة من الشبكة. بدون وسيط، بدون خادم،
+      بدون تخزين لبياناتك.
+    </p>
+    <div class="live">
+      <span class="pulse"></span>
+      <span data-i18n="live">متصل بـ</span>
+      <code id="net">mainnet-beta</code>
+      <span id="slot" class="muted"></span>
+    </div>
+  </section>
+
+  <nav class="tabs" role="tablist">
+    <button class="tab active" data-tab="token" role="tab" data-i18n="tabToken">فحص رمز</button>
+    <button class="tab" data-tab="wallet" role="tab" data-i18n="tabWallet">فحص محفظة</button>
+    <button class="tab" data-tab="about" role="tab" data-i18n="tabAbout">عن المشروع</button>
+  </nav>
+
+  <section id="panel-token" class="panel active">
+    <div class="inputrow">
+      <input id="mint" type="text" spellcheck="false" autocomplete="off"
+             placeholder="عنوان الرمز (mint) — مثال: EPjFW…TDt1v">
+      <button id="checkToken" class="go" data-i18n="check">افحص</button>
+    </div>
+    <div class="samples">
+      <span data-i18n="samples">أمثلة:</span>
+      <button class="chip" data-mint="EPjFWdd5AufqSSqeM2qN1xzybapC8G4wEGGkZwyTDt1v">USDC</button>
+      <button class="chip" data-mint="So11111111111111111111111111111111111111112">wSOL</button>
+      <button class="chip" data-mint="DezXAZ8z7PnrnRJjz3wXBoRgixCa6xjnB7YaB1pPB263">BONK</button>
+    </div>
+    <div id="tokenOut" class="out"></div>
+  </section>
+
+  <section id="panel-wallet" class="panel">
+    <div class="inputrow">
+      <input id="addr" type="text" spellcheck="false" autocomplete="off"
+             placeholder="عنوان المحفظة — مثال: 5Q544f…">
+      <button id="checkWallet" class="go" data-i18n="check">افحص</button>
+    </div>
+    <div id="walletOut" class="out"></div>
+  </section>
+
+  <section id="panel-about" class="panel">
+    <div class="about">
+      <h2 data-i18n="aboutTitle">لماذا SolPulse؟</h2>
+      <p data-i18n="about1">
+        سوق العملات الرقمية في المنطقة العربية يفتقر لأدوات عربية. معظم أدوات
+        التحقق من الرموز إنجليزية فقط، والمستخدم العربي يُترك ليخمّن أي رمز آمن.
+      </p>
+      <p data-i18n="about2">
+        SolPulse يقرأ البيانات مباشرة من شبكة سولانا (RPC) ومن واجهة Jupiter
+        للأسعار والسيولة — في المتصفح، بدون خادم، وبدون إرسال عنوانك لأي طرف ثالث.
+      </p>
+      <h3 data-i18n="howTitle">كيف نقيّم الخطر؟</h3>
+      <ul class="rules">
+        <li data-i18n="r1">سلطة السك (mint authority) مُلغاة = لا يمكن طباعة رموز جديدة.</li>
+        <li data-i18n="r2">سلطة التجميد (freeze authority) مُلغاة = لا يمكن تجميد رصيدك.</li>
+        <li data-i18n="r3">تركّز الحيازات: إذا كان أعلى 10 حسابات تملك نسبة ضخمة، الخطر أعلى.</li>
+        <li data-i18n="r4">السيولة: سيولة منخفضة تعني صعوبة الخروج وصعوبة عالية في السعر.</li>
+      </ul>
+      <p class="disclaimer" data-i18n="disc">
+        هذا تحليل آلي لبيانات علنية وليس نصيحة مالية.
+      </p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <span data-i18n="foot">SolPulse — بيانات حية من سولانا · مفتوح المصدر</span>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
